@@ -1,13 +1,22 @@
-from processamento import classificar_situacao
+from processamento import calcular_media, validar_notas, classificar_situacao
+
+def obter_dados_exemplo():
+    """
+    Estrutura de dados:
+    lista de tuplas no formato [("Nome", [notas])].
+    """
+    alunos = [
+        ("Ana", [8.0, 9.5, 7.0]),
+        ("Bruno", [5.0, 6.0]),
+        ("Carla", []),
+    ]
+    return alunos
 
 
 def main():
-    exemplos = [None, 5.5, 7.0, 9.0]
-
-    print("Classificação de situação (exemplos):")
-    for media in exemplos:
-        situacao = classificar_situacao(media)
-        print("Média:", media, "-> Situação:", situacao)
+    notas_exemplo = [8.0, "abc", 7.5, None, 10]
+    notas_validas = validar_notas(notas_exemplo)
+    media = calcular_media(notas_validas)
 
 
 if __name__ == "__main__":
