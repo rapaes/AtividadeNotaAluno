@@ -20,3 +20,17 @@ def validar_notas(lista_notas):
             pass
 
     return notas_validas
+
+
+def calcular_media(notas_validas):
+    """Calcula a média das notas válidas. Se não tiver notas, retorna None."""
+    if not notas_validas:
+        return None
+
+    soma = 0.0
+    for nota in notas_validas:
+        soma = soma + nota
+
+    quantidade = len(notas_validas)
+    media = soma / quantidade
+    return media
