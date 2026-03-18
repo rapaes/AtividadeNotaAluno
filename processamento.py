@@ -4,7 +4,7 @@ Módulo de processamento das notas dos alunos.
 As funções serão implementadas de forma incremental em branches separadas.
 """
 
-
+  
 def validar_notas(lista_notas):
     """Retorna apenas as notas válidas (numéricas) de uma lista."""
     notas_validas = []

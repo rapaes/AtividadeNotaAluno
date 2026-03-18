@@ -1,7 +1,10 @@
-from processamento import processar_alunos
-
+from processamento import calcular_media, validar_notas, classificar_situacao, processar_alunos
 
 def obter_dados_exemplo():
+    """
+    Estrutura de dados:
+    lista de tuplas no formato [("Nome", [notas])].
+    """
     alunos = [
         ("Ana", [8.0, 9.5, 7.0]),
         ("Bruno", [5.0, 6.0]),
@@ -25,6 +28,9 @@ def main():
 
     print("\nTop Student:")
     print(resultado["top_student"])
+    notas_exemplo = [8.0, "abc", 7.5, None, 10]
+    notas_validas = validar_notas(notas_exemplo)
+    media = calcular_media(notas_validas)
 
 
 if __name__ == "__main__":
