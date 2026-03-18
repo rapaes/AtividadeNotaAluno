@@ -5,6 +5,14 @@ As funções serão implementadas de forma incremental em branches separadas.
 """
 
 
+def classificar_situacao(media):
+    """Retorna a situação do aluno com base na média."""
+    if media is None:
+        return "Sem dados válidos"
+    if media < 7.0:
+        return "Recuperação"
+    return "Aprovado"
+  
 def validar_notas(lista_notas):
     """Retorna apenas as notas válidas (numéricas) de uma lista."""
     notas_validas = []

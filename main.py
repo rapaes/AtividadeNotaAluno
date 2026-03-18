@@ -1,5 +1,4 @@
-from processamento import calcular_media, validar_notas
-
+from processamento import calcular_media, validar_notas, classificar_situacao
 
 def obter_dados_exemplo():
     """
