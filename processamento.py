@@ -4,7 +4,7 @@ Módulo de processamento das notas dos alunos.
 As funções serão implementadas de forma incremental em branches separadas.
 """
 
-  
+
 def validar_notas(lista_notas):
     """Retorna apenas as notas válidas (numéricas) de uma lista."""
     notas_validas = []
@@ -84,3 +84,85 @@ def processar_alunos(lista_alunos):
         "top_student": top_student,
     }
     return resultado
+
+
+def gerar_relatorio_txt(dados_processados, nome_arquivo="resultado.txt"):
+    """
+    Gera um arquivo .txt com:
+      - todos os alunos (nome, média, situação)
+      - alunos em recuperação
+      - top student
+    """
+    linhas = []
+
+    linhas.append("RELATÓRIO DE DESEMPENHO ACADÊMICO")
+    linhas.append("================================")
+    linhas.append("")
+
+    alunos = dados_processados.get("alunos_processados", [])
+    em_rec = dados_processados.get("em_recuperacao", [])
+
+    # Resumo
+    linhas.append("Resumo:")
+    linhas.append("--------------------------------")
+    linhas.append("Total de alunos       : " + str(len(alunos)))
+    linhas.append("Alunos em recuperação : " + str(len(em_rec)))
+    linhas.append("")
+
+    # Lista de alunos
+    linhas.append("Alunos (médias e situações):")
+    linhas.append("--------------------------------")
+    for aluno in alunos:
+        nome = aluno["nome"]
+        media = aluno["media"]
+        situacao = aluno["situacao"]
+
+        if isinstance(media, (int, float)):
+            media_str = "{:.2f}".format(media)
+        else:
+            media_str = "N/A"
+
+        linhas.append("Aluno: " + nome)
+        linhas.append("  Média   : " + media_str)
+        linhas.append("  Situação: " + situacao)
+        linhas.append("")
+
+    # Alunos em recuperação
+    linhas.append("================================")
+    linhas.append("Alunos em Recuperação:")
+    linhas.append("--------------------------------")
+    if not em_rec:
+        linhas.append("Nenhum aluno em recuperação.")
+    else:
+        for aluno in em_rec:
+            nome = aluno["nome"]
+            media = aluno["media"]
+            if isinstance(media, (int, float)):
+                media_str = "{:.2f}".format(media)
+            else:
+                media_str = "N/A"
+            linhas.append(nome + " - Média: " + media_str)
+
+    linhas.append("")
+
+    # Top Student
+    linhas.append("================================")
+    linhas.append("Top Student:")
+    linhas.append("--------------------------------")
+    top = dados_processados.get("top_student")
+    if top is None:
+        linhas.append("Nenhum Top Student (sem médias válidas).")
+    else:
+        nome = top["nome"]
+        media = top["media"]
+        if isinstance(media, (int, float)):
+            media_str = "{:.2f}".format(media)
+        else:
+            media_str = "N/A"
+        linhas.append("Nome : " + nome)
+        linhas.append("Média: " + media_str)
+
+    # Salvar arquivo
+    with open(nome_arquivo, "w", encoding="utf-8") as arquivo:
+        for linha in linhas:
+            arquivo.write(linha + "\n")

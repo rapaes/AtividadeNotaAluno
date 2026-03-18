@@ -1,4 +1,4 @@
-from processamento import calcular_media, validar_notas, classificar_situacao, processar_alunos
+from processamento import calcular_media, validar_notas, classificar_situacao, processar_alunos, gerar_relatorio_txt
 
 def obter_dados_exemplo():
     """
@@ -10,12 +10,21 @@ def obter_dados_exemplo():
         ("Bruno", [5.0, 6.0]),
         ("Carla", []),
         ("Diego", [10, "abc", 9.0]),
+        ("Eduarda", [7.0, 7.5, 8.0]),
     ]
     return alunos
 
 
 def main():
     alunos = obter_dados_exemplo()
+    dados = processar_alunos(alunos)
+
+    print("Resumo no console:")
+    for aluno in dados["alunos_processados"]:
+        print(aluno)
+
+    gerar_relatorio_txt(dados)
+    print("\nRelatório 'resultado.txt' gerado na pasta do projeto.")
     resultado = processar_alunos(alunos)
 
     print("Alunos processados:")
